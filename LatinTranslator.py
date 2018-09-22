@@ -26,23 +26,30 @@ englishWord1 = "left"
 englishWord2 = "right"
 englishWord3 = "center"
 
+
 def translate1():
     translateBtn1.configure(text=englishWord1, command=translate4)
+
 
 def translate2():
     translateBtn2.configure(text=englishWord2, command=translate5)
 
+
 def translate3():
     translateBtn3.configure(text=englishWord3, command=translate6)
+
 
 def translate4():
     translateBtn1.configure(text=latinWord1, command=translate1)
 
+
 def translate5():
     translateBtn2.configure(text=latinWord2, command=translate2)
 
+
 def translate6():
     translateBtn3.configure(text=latinWord3, command=translate3)
+
 
 translateBtn1 = Button(middle, text=latinWord1, command=translate1)
 translateBtn2 = Button(middle, text=latinWord2, command=translate2)

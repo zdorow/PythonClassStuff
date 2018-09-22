@@ -27,28 +27,32 @@ mealCostEntry = Entry(root, bd=2, justify="center")
 buttonToCalculateTax = Button(root, text=" Calculate Tax ", bg="white", fg="black", font="Helvetica 8 bold")
 buttonToCalculateTotal = Button(root, text="Calculate Total", bg="white", fg="black", font="Helvetica 8 bold")
 
-# Intitial informational message.
+# Initial informational message.
 mealTotalOutput = Label(root, text="Press the button to select and perform calcuation", bg="black", fg="cyan", font="Helvetica 10")
 
-# The function that does all the calcuation and error handing for the tax.
-def barTabTaxCalculator():
 
-    # This is where we want to get a float number. Integers will be turned into float. All others will throw an exception.
+# The function that does all the calculation and error handing for the tax.
+def bar_tab_tax_calculator():
+
+    # This is where we want to get a float number. Integers will be turned into float.
+    # All others will throw an exception.
     try:
         meal = float(mealCostEntry.get())
 
         # Calculations needed for output.
-        taxTotal = meal * tax
+        tax_total = meal * tax
 
         # Printing the output with formatting for expected output when handling money.
-        mealTotalOutput.configure(text=f"Tax Total: ${taxTotal:,.2f}", bg="black", fg="cyan", font="Helvetica 10")
+        mealTotalOutput.configure(text=f"Tax Total: ${tax_total:,.2f}", bg="black", fg="cyan", font="Helvetica 10")
 
     # What the user sees when they input invalid data.
     except:
         mealTotalOutput.configure(text="Invalid Entry. Please enter the dollars and cents.", bg="yellow",  fg="red", font="Helvetica 10 bold")
 
-# The function that does all the calcuation and error handing for the tab total. Pretty much the same as the Tax function.
-def barTabTotalCalculator():
+
+# The function that does all the calculation and error handing for the tab total.
+# Pretty much the same as the Tax function.
+def bar_tab_total_calculator():
 
     try:
         meal = float(mealCostEntry.get())
@@ -57,14 +61,18 @@ def barTabTotalCalculator():
         taxTotal = meal * tax
         mealTotal = meal + tipTotal + taxTotal
 
-        mealTotalOutput.configure(text=f"Tip Total: ${tipTotal:,.2f} Meal Total: ${mealTotal:,.2f}", bg="black", fg="cyan", font="Helvetica 10")
+        mealTotalOutput.configure(text=f"Tip Total: ${tipTotal:,.2f} Meal Total: ${mealTotal:,.2f}", bg="black",
+                                  fg="cyan", font="Helvetica 10")
 
     except:
         mealTotalOutput.configure(text="Invalid Entry. Please enter the dollars and cents.", bg="yellow",  fg="red", font="Helvetica 10 bold")
 
+
 # Configuring the button to use the barTabCalculator function.
-buttonToCalculateTax.configure(command=barTabTaxCalculator)
-buttonToCalculateTotal.configure(command=barTabTotalCalculator)
+buttonToCalculateTax.configure(command=bar_tab_tax_calculator)
+
+
+buttonToCalculateTotal.configure(command=bar_tab_total_calculator)
 
 
 # This button is for the Exit button.
@@ -78,5 +86,5 @@ buttonToCalculateTotal.grid(row=3, padx=5, pady=5)
 mealTotalOutput.grid(row=4, padx=5, pady=0)
 exitButton.grid(row=5, padx=5, pady=5)
 
-#Continue running program
+# Continue running program
 root.mainloop()
