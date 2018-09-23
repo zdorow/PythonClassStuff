@@ -9,7 +9,9 @@
 #       determine which pocket the number falls into. Roulette Wheel Colors.
 #
 #######################################################################################
-# We are importing all of the tkinter library
+
+# We are importing all of the tkinter library. The message box as a separate import and
+# logging to get rid of broad exception errors.
 from tkinter import *
 import tkinter.messagebox
 import logging
