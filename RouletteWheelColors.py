@@ -10,23 +10,25 @@
 #
 #######################################################################################
 # We are importing all of the tkinter library.
+from tkinter import messagebox
 from tkinter import *
 import logging
+
 # Getting the GUI going.
 root = Tk()
 root.title("Roulette Wheel Colors")
-root.geometry("225x200")
+root.geometry("225x175")
 root.configure(background='black')
 
 # Defining the labels, entry box and button.
 labelNumberEntry = Label(root, text="Please pick a pocket: ", bg="black", fg="cyan", font="Helvetica 10")
-labelNumberEntry.pack(fill=X)
+labelNumberEntry.pack(fill=X, ipady=10)
 numberEntry = Entry(root, bd=2, justify="center")
-numberEntry.pack(fill=X)
+numberEntry.pack(fill=X, padx=10)
 buttonToPickAPocket = Button(root, text=" Pick a Pocket! ", bg="blue", fg="black", font="Helvetica 8 bold")
-buttonToPickAPocket.pack(fill=X)
+buttonToPickAPocket.pack(fill=X, padx=10)
 exitButton = Button(root, text="Exit", command=root.destroy, bg="blue", fg="red", font="Helvetica 7 bold")
-exitButton.pack(fill=X)
+exitButton.pack(fill=X, padx=10)
 
 # Initial informational message.
 finalPocketOutput = Label(root, text="Welcome to Roulette Wheel Colors! Press the button to pick a pocket!"
@@ -44,8 +46,7 @@ def pick_a_pocket():
     # What the user sees when they input invalid data.
 
     except Exception as nex:
-        finalPocketOutput.configure(text="Invalid Entry. Please enter the a number for the pocket", bg="yellow",
-                                    fg="red", font="Helvetica 10 bold")
+        messagebox.showwarning("Error!", "Invalid Entry. Please enter a number for the pocket.")
         logging.exception("User entered a non-numeric value" + nex)
 
     if pocket_picked == 0:
@@ -68,8 +69,7 @@ def pick_a_pocket():
             finalPocketOutput.configure(text="You have picked BLACK", bg="white", fg="black",
                                         font="Helvetica 10 bold")
     else:
-        finalPocketOutput.configure(text="Please enter a number from 0-36", bg="yellow", fg="red",
-                                    font="Helvetica 10 bold")
+        messagebox.showwarning("Out of Range!", "Entry out of range. Please enter a number from 0-36.")
 
 
 buttonToPickAPocket.configure(command=pick_a_pocket)
