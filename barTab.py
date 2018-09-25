@@ -12,7 +12,7 @@
 # This loop is for validating user input.
 while True:
     try:
-        # This is where we want to get a float number. Integers will be turned into float.
+        # This is where we want to get a int number. Integers will be turned into int.
         meal = float(input("Please enter the total charge for the food and drinks: "))
         break
 

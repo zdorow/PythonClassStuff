@@ -33,8 +33,8 @@ def weight_calculator():
 
     # Create a try block
     try:
-        # Convert the mass entry to a float
-        mass = float(massEntry.get())
+        # Convert the mass entry to a int
+        mass = int(massEntry.get())
 
         # Calculate newtons
         newtons = mass * 9.8

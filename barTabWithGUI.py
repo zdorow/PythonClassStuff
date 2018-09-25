@@ -34,7 +34,7 @@ mealTotalOutput = Label(root, text="Press the button to select and perform calcu
 # The function that does all the calculation and error handing for the tax.
 def bar_tab_tax_calculator():
 
-    # This is where we want to get a float number. Integers will be turned into float.
+    # This is where we want to get a int number. Integers will be turned into int.
     # All others will throw an exception.
     try:
         meal = float(mealCostEntry.get())
