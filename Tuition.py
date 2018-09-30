@@ -51,7 +51,7 @@ def calculate_tuition():
 
         else:
             tuitionOutput.configure(text=tuitionOutput.cget("text") + "The tuition for year " + f"{year} " +
-                                         f"is: ${tuition:.2f}\n", pady=0)
+                                    f"is: ${tuition:.2f}\n", pady=0)
     calculateButton.configure(pady=0)
 
 
