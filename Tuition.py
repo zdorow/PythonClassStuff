@@ -1,14 +1,4 @@
-#######################################################################################
-#
-#     Program was written for the Advanced Programming class at Lakeland University
-#     Author: Zachary Dorow
-#     Teacher: Mr. Kevin Kurek
-#     Last Edited: Sept 29, 2018
-#
-#     Description: The program function is to calculate tuition for the next 5 years.
-#
-#
-#######################################################################################
+
 from tkinter import *
 
 # Getting the GUI going.

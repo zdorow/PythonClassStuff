@@ -21,8 +21,8 @@
 #     exit_code = input("Type go to go again.")
 
 # For loop that displays 0, 10, 20, 30, 40, 50 ... 1000
-# for number in range(0, 1010, 10):
-#     print("The number: " + f"{number}")
+for number in range(0, 1010, 10):
+    print("The number: " + f"{number}")
 #     number += 10
 
 # Loop that asks user to enter number 10 times and adds them all
@@ -41,9 +41,9 @@
 # x /= 10
 # x -= 200
 
-int_input = int(input("Please enter a number between 1 through 100"))
-
-if int_input in range(1, 101):
-    print("Number in range.")
-else:
-    print("Number not in range")
+# int_input = int(input("Please enter a number between 1 through 100"))
+#
+# if int_input in range(1, 101):
+#     print("Number in range.")
+# else:
+#     print("Number not in range")
