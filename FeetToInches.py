@@ -7,7 +7,7 @@
 
 # Import library
 from tkinter import *
-from tkinter import messagebox
+
 
 # Create window and configure
 root = Tk()
