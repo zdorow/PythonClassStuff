@@ -1,3 +1,13 @@
+#######################################################################################
+#
+#     Program was written for the Advanced Programming class at Lakeland University
+#     Author: Zachary Dorow
+#     Teacher: Mr. Kevin Kurek
+#     Last Edited: Oct 05, 2018
+#
+#     Description: The program function is to take user input and validate then
+#
+#######################################################################################
 from tkinter import *
 from tkinter import messagebox
 
