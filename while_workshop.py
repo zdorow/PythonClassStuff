@@ -71,3 +71,22 @@
 # # #     print(d)
 # # #
 # # # my_function(2, 4, 6)
+
+# name = open("my_name.txt", "w")
+# name.write("Zach Dorow")
+# name.close()
+#
+# name = open("my_name.txt", "r")
+# print(name.read())
+# name.close()
+
+try:
+    x = float('abc123')
+    print(x)
+except IOError:
+    print("This is a fucking error")
+except ZeroDivisionError:
+    print("There is nothing to divide here.")
+except:
+    print("Generally something is always wrong")
+print('This is the end, beautiful friend. The end.')
