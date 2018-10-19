@@ -38,15 +38,15 @@ root.bind('<Alt_L><f>', lambda e: find_name())
 root.bind('<Alt_L><X>', lambda f: destroy())
 root.bind('<Alt_L><x>', lambda f: destroy())
 
-nameEntryLabel = Label(root, text="Enter name to find out if it is a popular name: ", bg="black", fg="cyan",
-                       font="Helvetica 12",)
+nameEntryLabel = Label(root, text="Enter a name to find out if it is a popular name: ", bg="seashell3", fg="black",
+                       font="Helvetica 12 bold")
 
 nameEntry = Entry(root)
 
 findButton = Button(root, text="Find out!", bg="seashell3", highlightbackground="black",
-                    fg="blue", font="Helvetica 8 bold", underline=0, command=find_name)
+                    fg="black", font="Helvetica 8 bold", underline=0, command=find_name)
 
-exitButton = Button(root, text="Exit", command=root.destroy, bg="seashell3", highlightbackground="black", fg="blue",
+exitButton = Button(root, text="Exit", command=root.destroy, bg="seashell3", highlightbackground="black", fg="black",
                     font="Helvetica 8 bold", underline=1)
 
 nameEntryLabel.pack(padx=5, pady=5)
