@@ -80,13 +80,73 @@
 # print(name.read())
 # name.close()
 
-try:
-    x = float('abc123')
-    print(x)
-except IOError:
-    print("This is a fucking error")
-except ZeroDivisionError:
-    print("There is nothing to divide here.")
-except:
-    print("Generally something is always wrong")
-print('This is the end, beautiful friend. The end.')
+# try:
+#     x = float('abc123')
+#     print(x)
+# except IOError:
+#     print("This is a fucking error")
+# except ZeroDivisionError:
+#     print("There is nothing to divide here.")
+# except:
+#     print("Generally something is always wrong")
+# print('This is the end, beautiful friend. The end.')
+#
+# list_dict_test = {'key1': 'test1', 'key2': [{'key2.1': 'test2.1', 'key2.2':'test2.2'}]}
+# for key, value in list_dict_test.items(): # iterate through key and values in a dictionary
+#     if isinstance(value, list): # if value is a list
+#         for index_of_value in range(len(value[0].items())): # grabs index values in the list
+#             print(index_of_value)
+#             if index_of_value == 0:
+#                 index_of_value + 1
+#             for i in range(index_of_value): # iterate index from above
+#                     print("x") # should print x twice
+#         else:
+#             print(key)
+#             print(value)
+
+# list_dict_test = {'key1': 'test1', 'key2': [{'key2.1': 'test2.1', 'key2.2': 'test2.2', 'key2.3': 'test2.3'}], 'key3': 'test3'}
+# desired_list = list_dict_test['key2'][0].items()
+#
+# for range_of_value in range(len(list(desired_list))):
+#
+#     print(desired_list[range_of_value])
+
+list_dict_test = {'key1': 'test1', 'key2':[{'key2.1': 'test2.1', 'key2.2':'test2.2', 'key2.3':'test2.3'}], 'key3': 'test3'}
+
+
+def famj(my_value):
+    for key, value in list_dict_test.items():
+        if isinstance(value, list):
+            nested_dict = value[0]
+            for key, value in nested_dict.items():
+                if value == 'test2.2':
+                    print(f"nested value: {value}")
+                    for key, value in nested_dict.items():
+                        if key == 'key2.3':
+                            print(f"nested value: {value}")
+
+
+famj(list_dict_test)
+# # random sales dictionary
+# sales = { 'apple': 2, 'orange': 3, 'grapes': 4 }
+#
+# items = sales.items()
+# print('Original items:', items)
+#
+# # delete an item from dictionary
+# add[sales['apple']]
+# print('Updated items:', items)
+
+# for key,value in list_dict_test.items():
+#     if isinstance(value, list):
+#         #print(value)#[{'key2.1': 'test2.1', 'key2.2': 'test2.2', 'key2.3': 'test2.3'}]
+#         for range_of_value in range(len(value[0].items())):
+#             #num_index = range_of_value #0,1,2
+#             for x in range(range_of_value):
+#             #print(x) #0,1,2
+#                 for nested_dict_key_pairs in (list_dict_test['key2'][0].items()):
+#                     print(nested_dict_key_pairs)
+#
+#     else:
+#         print(key)
+#         print(value)
