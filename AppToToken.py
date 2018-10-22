@@ -75,14 +75,87 @@ def save_filename(entry):
         return file_name
 
 
-def append_token_list(token_in, scroll):
-    token_list.append(token_in)
-    scroll.delete('1.0', END)
+def append_token_list():
+    token_info_in = tokenBox.get('1.0', END)
+
+    if os.access(adam_id_info_in, os.W_OK):
+
+        token_info_in_open = open(r"" + token_info_in)
+        adam_id_check = token_info_in_open.read().replace('\n', '')
+        ids = numbers_in_line.findall(adam_id_check)
+        print(ids)
+
+        if len(ids) % 9 == 0 and len(ids) != 0:
+            new_id_list = [ids[idx:idx+9] for idx, val in enumerate(ids) if idx % 9 == 0]
+            for all_ids in set(new_id_list):
+                adam_id_list.append(all_ids)
+
+                print(adam_id_list)
+            adamIdEntryLabel.configure(text="Successfully Added VPP Token!\n")
+            adamIdEntry.delete(0, 'end')
+        else:
+            messagebox.showerror("Error VPP Token!", "There was an inputting the VPP Token!\n "
+                                                     "Please check the file input.")
+    else:
+        ids = numbers_in_line.findall(adam_id_info_in)
+        string_ids = "".join(ids)
+        print(string_ids)
+        print(len(string_ids))
+        if len(string_ids) % 9 == 0 and len(string_ids) != 0:
+            new_id_list = [string_ids[idx:idx+9] for idx, val in enumerate(string_ids) if idx % 9 == 0]
+            for ids in set(new_id_list):
+                adam_id_list.append(ids)
+
+            print(adam_id_list)
+            adamIdEntryLabel.configure(text="Successfully Added VPP Token!\n")
+            adamIdEntry.delete(0, 'end')
+        else:
+            messagebox.showerror("Error VPP Token!", "There was an inputting the VPP Token!\n "
+                                                     "Please check the file input.")
 
 
-def append_adam_id_list(adam_id_in, entry):
-    adam_id_list.append(adam_id_in)
-    entry.delete
+def append_adam_id_list():
+    adam_id_info_in = adamIdEntry.get()
+    numbers_in_line = re.compile('\d+')
+
+    if os.access(adam_id_info_in, os.W_OK):
+
+        adam_id_list_open = open(r"" + adam_id_info_in)
+        adam_id_check = adam_id_list_open.read().replace('\n', '')
+
+        ids = numbers_in_line.findall(adam_id_check)
+        string_ids = "".join(ids)
+
+        if len(string_ids) % 9 == 0 and len(string_ids) != 0:
+            new_id_list = [string_ids[idx:idx+9] for idx, val in enumerate(string_ids) if idx % 9 == 0]
+            for all_ids in set(new_id_list):
+                adam_id_list.append(all_ids)
+
+                print(adam_id_list)
+            adamIdEntryLabel.configure(text="Successfully Added Adam IDs!\n")
+            adamIdEntry.delete(0, 'end')
+        else:
+            messagebox.showerror("Error Adam ID", "There was an inputting the Adam IDs.\n "
+                                                  "Please check the file input.")
+    else:
+        numbers_in_line = re.compile('\d+')
+
+        ids = numbers_in_line.findall(adam_id_info_in)
+        string_ids = "".join(ids)
+        print(string_ids)
+        print(len(string_ids))
+        if len(string_ids) % 9 == 0 and len(string_ids) != 0:
+            new_id_list = [string_ids[idx:idx+9] for idx, val in enumerate(string_ids) if idx % 9 == 0]
+            for ids in set(new_id_list):
+                adam_id_list.append(ids)
+
+            print(adam_id_list)
+            adamIdEntryLabel.configure(text="Successfully Added Adam IDs!\n")
+            adamIdEntry.delete(0, 'end')
+        else:
+            messagebox.showerror("Error Adam ID", "There was an inputting the Adam IDs.\n "
+                                                     "Please check your input.")
+
 
 
 def clear_list(list_to_clear, label):
@@ -121,7 +194,7 @@ adamIdEntryLabel = Label(top_frame, text="Please enter adam ids or the file path
 
 adamIdEntry = Entry(top_frame, width=35)
 
-adamIdListButton = Button(top_frame, text="Add to Adam ID List", command=root.destroy, bg="seashell3", highlightbackground="black",
+adamIdListButton = Button(top_frame, text="Add to Adam ID List", command=lambda: append_adam_id_list(), bg="seashell3", highlightbackground="black",
                           fg="black", font="Helvetica 7 bold", underline=1)
 
 adamIdFilepathButton = Button(top_frame, text="Set path to Adam ID file", command=lambda: get_adam_id_filename(adamIdEntry), bg="seashell3",
@@ -183,24 +256,6 @@ outputFileName.pack(padx=5, pady=5)
 buildListButton.pack(side=LEFT, padx=5, pady=5)
 setFilepathButton.pack(side=LEFT, padx=35, pady=5)
 exitButton.pack(side=LEFT, padx=5, pady=5)
-# adamIdEntryLabel.grid(row=0, column=2, columnspan=3, padx=5, pady=5)
-# adamIdEntry.grid(row=1, column=2, columnspan=3, padx=5, pady=5)
-# adamIdListButton.grid(row=2, column=2, columnspan=1, pady=5, sticky=W)
-# clearAdamIDListButton.grid(row=2, column=2, columnspan=2, pady=5)
-# adamIdFilepathButton.grid(row=2, column=3, columnspan=3, padx=5, pady=5, sticky=W)
-#
-#
-# tokenEntryLabel.grid(row=3, column=2, columnspan=3, padx=5, pady=5)
-# tokenBox.grid(row=4, padx=5, column=2, columnspan=3, pady=5)
-# addToTokenListButton.grid(row=5,  column=2, columnspan=1, pady=5, sticky=W)
-# clearTokenListButton.grid(row=5, column=2, columnspan=2, pady=5)
-# setTokenFilepathButton.grid(row=5, column=3, columnspan=3, padx=5, pady=5, sticky=W)
-#
-# outputFileNameEntryLabel.grid(row=6,  column=2, columnspan=3, padx=5, pady=5)
-# outputFileName.grid(row=7,  column=2, columnspan=3, pady=5)
-# buildListButton.grid(row=8, column=1, columnspan=1, pady=5, sticky=W)
-# setFilepathButton.grid(row=8, column=2, pady=5)
-# exitButton.grid(row=8, column=3, columnspan=3, padx=5, pady=5, sticky=E)
 
 
 for token in range(len(token_list)):
@@ -209,8 +264,10 @@ for token in range(len(token_list)):
         print(adam_id_list[adam_id])
         print(get_count_info(token_list[token], adam_id_list[adam_id]))
 
-root.bind('<Alt_L><A>', lambda e: append_token_list())
-root.bind('<Alt_L><a>', lambda e: append_token_list())
+root.bind('<Alt_L><T>', lambda e: append_token_list())
+root.bind('<Alt_L><T>', lambda e: append_token_list())
+root.bind('<Alt_L><A>', lambda e: append_adam_id_list())
+root.bind('<Alt_L><a>', lambda e: append_adam_id_list())
 root.bind('<Alt_L><G>', lambda f: get_count_info())
 root.bind('<Alt_L><g>', lambda f: get_count_info())
 root.bind('<Alt_L><X>', lambda g: destroy())
