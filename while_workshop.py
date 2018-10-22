@@ -111,22 +111,22 @@
 #
 #     print(desired_list[range_of_value])
 
-list_dict_test = {'key1': 'test1', 'key2':[{'key2.1': 'test2.1', 'key2.2':'test2.2', 'key2.3':'test2.3'}], 'key3': 'test3'}
-
-
-def famj(my_value):
-    for key, value in list_dict_test.items():
-        if isinstance(value, list):
-            nested_dict = value[0]
-            for key, value in nested_dict.items():
-                if value == 'test2.2':
-                    print(f"nested value: {value}")
-                    for key, value in nested_dict.items():
-                        if key == 'key2.3':
-                            print(f"nested value: {value}")
-
-
-famj(list_dict_test)
+# list_dict_test = {'key1': 'test1', 'key2':[{'key2.1': 'test2.1', 'key2.2':'test2.2', 'key2.3':'test2.3'}], 'key3': 'test3'}
+#
+#
+# def famj(my_value):
+#     for key, value in list_dict_test.items():
+#         if isinstance(value, list):
+#             nested_dict = value[0]
+#             for key, value in nested_dict.items():
+#                 if value == 'test2.2':
+#                     print(f"nested value: {value}")
+#                     for key, value in nested_dict.items():
+#                         if key == 'key2.3':
+#                             print(f"nested value: {value}")
+#
+#
+# famj(list_dict_test)
 # # random sales dictionary
 # sales = { 'apple': 2, 'orange': 3, 'grapes': 4 }
 #
@@ -150,3 +150,35 @@ famj(list_dict_test)
 #     else:
 #         print(key)
 #         print(value)
+# namesList = ['Einstein', 'Newton', 'Copernicus', 'Kepler']
+# numbers = [2] * 5
+#
+# print(numbers)
+# list = [1,2,3,4,5,6,67,78,65]
+#
+# def sum_of_list(list):
+#     return sum(list)
+#
+# print(sum_of_list(list))
+
+# names_list = ["Joe"]
+#
+# name = "Ruby"
+#
+# if name in names_list:
+#     print("Hello Ruby")
+# else:
+#     print("No Ruby")
+
+from tkinter import *
+
+root = Tk()
+
+canvas = Canvas(root, width=400, height=400)
+canvas.pack()
+
+canvas.create_rectangle(50, 50, 100, 100, fill='red')
+canvas.create_polygon(70, 80, 125, 100, 12, 23, fill='black')
+canvas.create_arc(20, 75, 150, 150, start=0, extent=180, fill='blue')
+
+root.mainloop()
