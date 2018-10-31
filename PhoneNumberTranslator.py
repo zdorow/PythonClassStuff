@@ -38,6 +38,7 @@ def callback():
         logging.exception("User tried to enter a value that is not present." + nex)
     numberOutput.configure(text=phone_number)
 
+
 def destroy():
     root.destroy()
 

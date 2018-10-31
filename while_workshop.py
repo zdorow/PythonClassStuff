@@ -170,15 +170,61 @@
 # else:
 #     print("No Ruby")
 
-from tkinter import *
+# from tkinter import *
+#
+# root = Tk()
+#
+# canvas = Canvas(root, width=400, height=400)
+# canvas.pack()
+#
+# canvas.create_rectangle(50, 50, 100, 100, fill='red')
+# canvas.create_polygon(70, 80, 125, 100, 12, 23, fill='black')
+# canvas.create_arc(20, 75, 150, 150, start=0, extent=180, fill='blue')
+#
+# root.mainloop()
 
-root = Tk()
+# xml="<note><date>2015-09-01</date><hour>08:30</hour><to>Tove</to><from>Jani</from><body>Don't forget me this weekend!</body></note>"
+#
+# cleaner_xml = str.maketrans("<>/", "   ")
+# cleaned_up_xml = xml.translate(cleaner_xml)
+#
+# print(cleaned_up_xml)
 
-canvas = Canvas(root, width=400, height=400)
-canvas.pack()
+# mystr = 'yes'
+# mystr += 'no'
+# mystr += 'yes'
+#
+# mystr = 'abc' * 3
+# print(mystr)
 
-canvas.create_rectangle(50, 50, 100, 100, fill='red')
-canvas.create_polygon(70, 80, 125, 100, 12, 23, fill='black')
-canvas.create_arc(20, 75, 150, 150, start=0, extent=180, fill='blue')
+# mystr = 'abcdefg'
+#
+# print(mystr[2:5])
 
-root.mainloop()
+# numbers = [1, 2, 3, 4, 5, 6, 7]
+# # print(numbers[4:6])
+# if choice.upper() == 'Y':
+#     name = 'joe'
+#
+# print(name.lower())
+# print(name.upper())
+# print(name)
+
+# def email_check(string_input):
+#     if string_input.endswith(".com"):
+#         return True
+#     else:
+#         return False
+#
+# print(email_check("test"))
+
+# def reverse(string_input):
+#     return string_input[::-1]
+#
+# print(reverse("test"))
+
+mystring = 'cookies>milk>fude>cake>ice cream'
+
+string_list = mystring.split(">")
+
+print(string_list)
