@@ -223,8 +223,169 @@
 #
 # print(reverse("test"))
 
-mystring = 'cookies>milk>fude>cake>ice cream'
+# mystring = 'cookies>milk>fude>cake>ice cream'
+#
+# string_list = mystring.split(">")
+#
+# print(string_list)
 
-string_list = mystring.split(">")
+# Allowing the widget to take the full space of the window.
+# self.pack(fill=BOTH, expand=1)
+#
+# # Creating a menu instance.
+# menu = Menu(self.master)
+# self.master.config(menu=menu)
+#
+# # Create the File object.
+# file = Menu(menu)
+#
+# # Adds a command to the File option
+# file.add_command(label="Save", command=self.client_exit)
+# file.add_command(label="Save As", command=self.client_exit)
+# file.add_command(label="Open", command=self.client_exit)
+# file.add_command(label="Exit", command=self.client_exit)
+#
+# # Added "file" label to the menu.
+# menu.add_cascade(label="File", menu=file)
+#
+# # Create the Edit object.
+# edit = Menu(menu)
+#
+# # Adds a command to the Edit option.
+# edit.add_command(label="Undo")
+# edit.add_command(label="Redo")
+#
+# # Added "Edit" to our menu bar.
+# menu.add_cascade(label="Edit", menu=edit)
 
-print(string_list)
+# dct = {'Monday': 1, 'Tuesday': 2, 'Wednesday': 3}
+# print(dct.get("Friday", 'Not Found'))
+
+# stuff = {'Monday': 1, 'Tuesday': 2, 'Wednesday': 3}
+# print(stuff["Tuesday"])
+
+# dct = {1: [0, 1], 2: [2, 3], 3: [4, 5]}
+# for k in dct:
+#     print(k)
+
+# myset = set('1 2 3')
+#
+# print(myset)
+#
+# set1 = set([100, 200, 300, 400, 500])
+# set2 = set([200, 400, 500])
+# # set3 = set1.symmetric_difference(set2)
+#
+# print(set1.issuperset(set2))
+
+# set1 = set(['d', 'e', 'f'])
+# set2 = set(['a', 'b', 'c', 'd', 'e'])
+# set3 = set2.symmetric_difference(set1)
+#
+# print(set3)
+
+# print(dct.get('James', 'Not Found'))
+
+# import pickle
+#
+# dct = {1: "a", 2: "b"}
+#
+# pickle.dump(dct, open("my_data.dat", "wb"))
+#
+# imported_dct = pickle.load(open("my_data.dat", "rb"))
+#
+# print(imported_dct)
+# from tkinter import Tk, Frame, Menu
+#
+# class Example(Frame):
+#
+#     def __init__(self):
+#         super().__init__()
+#
+#         self.initUI()
+#
+#
+#     def initUI(self):
+#
+#         self.master.title("Simple menu")
+#
+#         menubar = Menu(self.master)
+#         self.master.config(menu=menubar)
+#
+#         fileMenu = Menu(menubar)
+#         fileMenu.add_command(label="Exit", command=self.onExit)
+#         menubar.add_cascade(label="File", menu=fileMenu)
+#
+#
+#     def onExit(self):
+#
+#         self.quit()
+# Simple enough, just import everything from tkinter.
+from tkinter import *
+
+
+# Here, we are creating our class, Window, and inheriting from the Frame
+# class. Frame is a class from the tkinter module. (see Lib/tkinter/__init__)
+class Window(Frame):
+
+    # Define settings upon initialization. Here you can specify
+    def __init__(self, master=None):
+
+        # parameters that you want to send through the Frame class.
+        Frame.__init__(self, master)
+
+        #reference to the master widget, which is the tk window
+        self.master = master
+
+        #with that, we want to then run init_window, which doesn't yet exist
+        self.init_window()
+
+    #Creation of init_window
+    def init_window(self):
+
+        # changing the title of our master widget
+        self.master.title("GUI")
+
+        # allowing the widget to take the full space of the root window
+        self.pack(fill=BOTH, expand=1)
+
+        # creating a menu instance
+        menu = Menu(self.master)
+        self.master.config(menu=menu)
+
+        # create the file object)
+        file = Menu(menu)
+
+        # adds a command to the menu option, calling it exit, and the
+        # command it runs on event is client_exit
+        file.add_command(label="Exit", command=self.client_exit)
+
+        #added "file" to our menu
+        menu.add_cascade(label="File", menu=file)
+
+        # create the file object)
+        edit = Menu(menu)
+
+        # adds a command to the menu option, calling it exit, and the
+        # command it runs on event is client_exit
+        edit.add_command(label="Undo")
+
+        #added "file" to our menu
+        menu.add_cascade(label="Edit", menu=edit)
+
+
+    def client_exit(self):
+        exit()
+
+
+# root window created. Here, that would be the only window, but
+# you can later have windows within windows.
+root = Tk()
+
+root.geometry("400x300")
+
+#creation of an instance
+app = Window(root)
+
+#mainloop
+root.mainloop()
