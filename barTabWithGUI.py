@@ -16,4 +16,3 @@ from barTabGUIclass import barTabGUI
 root = Tk()
 bar_tab_gui = barTabGUI(root)
 root.mainloop()
-
