@@ -11,6 +11,7 @@
 #######################################################################################
 import re
 import time
+import random
 import threading
 from tkinter import *
 from Wheel import *
@@ -22,9 +23,9 @@ class slotMachineGUI:
 
     def __init__(self, master):
 
-        lemon_img = PhotoImage(file=r"C:\Users\ZD\IdeaProjects\PythonClassStuff\lemon.png")
-        grape_img = PhotoImage(file=r"C:\Users\ZD\IdeaProjects\PythonClassStuff\grape.png")
-        cherry_img = PhotoImage(file=r"C:\Users\ZD\IdeaProjects\PythonClassStuff\cherry.png")
+        lemon_img = PhotoImage(file=r"/Users/zach.dorow/IdeaProjects/barTab/lemon.png")
+        grape_img = PhotoImage(file=r"/Users/zach.dorow/IdeaProjects/barTab/grape.png")
+        cherry_img = PhotoImage(file=r"/Users/zach.dorow/IdeaProjects/barTab/cherry.png")
 
         pieces = {1: lemon_img, 2: grape_img, 3: cherry_img}
 
@@ -138,21 +139,18 @@ class slotMachineGUI:
 
     def spin_the_wheels(self, pieces, wheel_one, wheel_two, wheel_three):
 
-        for run in range(1, 5):
-            for keys, piece in pieces.items():
-                time.sleep(0.25)
-                print(wheel_one)
-                print(pieces[wheel_one])
-                print(wheel_two)
-                print(pieces[wheel_two])
-                print(wheel_three)
-                print(pieces[wheel_three])
-                self.firstWheel.configure(image=piece)
-                self.secondWheel.configure(image=piece)
-                self.thirdWheel.configure(image=piece)
-                new_thread = threading.Thread(target=lambda: self.spin_the_wheels(pieces, self.first_wheel.pick, self.second_wheel.pick, self.third_wheel.pick))
-                self.new_thread = new_thread
-                self.buttonToSpinWheels.configure(command=lambda: self.thread_start_if_not(self.new_thread))
+        for run in range(1, 15):
+            time.sleep(0.1)
+            number, random_pick1 = random.choice(list(pieces.items()))
+            number, random_pick2 = random.choice(list(pieces.items()))
+            number, random_pick3 = random.choice(list(pieces.items()))
+            self.firstWheel.configure(image=random_pick1)
+            self.secondWheel.configure(image=random_pick2)
+            self.thirdWheel.configure(image=random_pick3)
+
+        new_thread = threading.Thread(target=lambda: self.spin_the_wheels(pieces, self.first_wheel.pick, self.second_wheel.pick, self.third_wheel.pick))
+        self.new_thread = new_thread
+        self.buttonToSpinWheels.configure(command=lambda: self.thread_start_if_not(self.new_thread))
 
         self.firstWheel.configure(image=pieces[wheel_one])
         self.secondWheel.configure(image=pieces[wheel_two])

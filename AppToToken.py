@@ -10,11 +10,13 @@ from requests.exceptions import ConnectionError
 
 
 root = Tk()
-top_frame = Frame(root, highlightbackground="green", highlightcolor="green", highlightthickness=2)
+root.configure(background='black')
 
-middle_frame = Frame(root, highlightbackground="green", highlightcolor="green", highlightthickness=2, width=100, height=100, bd= 0)
+top_frame = Frame(root, highlightbackground="green", highlightcolor="green", background='seashell3', highlightthickness=2)
 
-bottom_frame = Frame(root, highlightbackground="green", highlightcolor="green", highlightthickness=2, width=100, height=100, bd= 0)
+middle_frame = Frame(root, highlightbackground="green", highlightcolor="green", background='seashell3', highlightthickness=2, width=100, height=100, bd= 0)
+
+bottom_frame = Frame(root, highlightbackground="green", highlightcolor="green", background='seashell3', highlightthickness=2, width=100, height=100, bd= 0)
 
 root.title("Map Tokens to Adam ID's")
 
@@ -136,7 +138,7 @@ def append_adam_id_list():
             adamIdEntryLabel.configure(text="Successfully Added Adam IDs!\n")
             adamIdEntry.delete(0, 'end')
         else:
-            messagebox.showerror("Error Adam ID", "There was an inputting the Adam IDs.\n "
+            messagebox.showerror("Error Adam ID", "There was an error inputting the Adam IDs.\n "
                                                   "Please check the file input.")
     else:
         numbers_in_line = re.compile('\d+')
@@ -189,53 +191,54 @@ def get_count_info(token_in, adam_id_in):
 def destroy():
     root.destroy()
 
+button_settings="\"bg=\"seashell3\", highlightbackground=\"seashell3\", fg=\"black\", font=\"Helvetica 11\","
 
-adamIdEntryLabel = Label(top_frame, text="Please enter adam ids or the file path to a file with adam ids to add.",
-                         fg="black", font="Helvetica 12 bold", wraplength=300)
+adamIdEntryLabel = Label(top_frame, text="Please enter Adam IDs or the file path to a file with Adam IDs to add.",
+                         fg="black", highlightbackground='seashell3', bg="seashell3", font="Helvetica 14", wraplength=350)
 
-adamIdEntry = Entry(top_frame, width=35)
+adamIdEntry = Entry(top_frame, width=35, highlightbackground='grey')
 
-adamIdListButton = Button(top_frame, text="Add to Adam ID List", command=lambda: append_adam_id_list(), bg="seashell3", highlightbackground="black",
-                          fg="black", font="Helvetica 7 bold", underline=1)
+adamIdListButton = Button(top_frame, text=" Add to Adam ID List ", command=lambda: append_adam_id_list(), underline=1, bg="seashell3",
+                          highlightbackground="seashell3", fg="black", font="Helvetica 12",)
 
-adamIdFilepathButton = Button(top_frame, text="Set path to Adam ID file", command=lambda: get_adam_id_filename(adamIdEntry), bg="seashell3",
-                              highlightbackground="black", fg="black", font="Helvetica 7 bold", underline=1)
+clearAdamIDListButton = Button(top_frame, text=" Clear Adam ID list ", command=lambda: clear_list(adam_id_list, adamIdEntryLabel), bg="seashell3",
+                               highlightbackground="seashell3", fg="black", font="Helvetica 12", underline=1)
 
-clearAdamIDListButton = Button(top_frame, text="Clear Adam ID list", command=lambda: clear_list(adam_id_list, adamIdEntryLabel), bg="seashell3",
-                               highlightbackground="black", fg="black", font="Helvetica 7 bold", underline=1)
+adamIdFilepathButton = Button(top_frame, text=" Set path to Adam ID file ", command=lambda: get_adam_id_filename(adamIdEntry), bg="seashell3",
+                              highlightbackground="seashell3", fg="black", font="Helvetica 12", underline=1)
 
 
-tokenEntryLabel = Label(middle_frame, text="Paste the tokens in here or set the filepath for a token to add. ",
-                        fg="black", font="Helvetica 12 bold", wraplength=300)
 
-tokenBox = ScrolledText(middle_frame, width=25, height=15)
 
-addToTokenListButton = Button(middle_frame, text="Add to Token List", command=root.destroy, bg="seashell3", highlightbackground="black",
-                              fg="black", font="Helvetica 7 bold", underline=1)
+tokenEntryLabel = Label(middle_frame, text="Paste the tokens in here or set the filepath for a token to add.",
+                        fg="black", highlightbackground='seashell3', bg="seashell3", font="Helvetica 14", wraplength=350)
 
-setTokenFilepathButton = Button(middle_frame, text="Set Path to VPP token",
-                                command=lambda: get_token_filename(tokenBox), bg="seashell3",
-                                highlightbackground="black", fg="black", font="Helvetica 7 bold", underline=1)
+tokenBox = ScrolledText(middle_frame, width=45, height=15,  highlightbackground='grey')
 
-clearTokenListButton = Button(middle_frame, text="Clear Token list", command=lambda: clear_list(token_list, tokenEntryLabel), bg="seashell3",
-                              highlightbackground="black", fg="black", font="Helvetica 7 bold", underline=1)
+addToTokenListButton = Button(middle_frame, text=" Add to Token List ", command=append_token_list, bg="seashell3",
+                              highlightbackground="seashell3", fg="black", font="Helvetica 12", underline=1)
+
+setTokenFilepathButton = Button(middle_frame, text=" Set Path to VPP token ",
+                                command=lambda: get_token_filename(tokenBox),bg="seashell3",
+                                highlightbackground="seashell3", fg="black", font="Helvetica 12", underline=1)
+
+clearTokenListButton = Button(middle_frame, text=" Clear Token list ", command=lambda: clear_list(token_list, tokenEntryLabel), bg="seashell3",
+                              highlightbackground="seashell3", fg="black", font="Helvetica 12", underline=1)
 
 
 outputFileNameEntryLabel = Label(bottom_frame, text="Enter the path desired for the file output or use the button to fill in"
-                                                    " the path.", fg="black", font="Helvetica 12 bold",
-                                 wraplength=300)
+                                                    " the path.", fg="black", highlightbackground='seashell3', bg="seashell3", font="Helvetica 14", wraplength=350)
 
-outputFileName = Entry(bottom_frame, width=35)
+outputFileName = Entry(bottom_frame, width=35, highlightbackground='grey')
 
-buildListButton = Button(bottom_frame, text="Build the list", command=get_count_info, bg="seashell3", highlightbackground="black",
-                         fg="black", font="Helvetica 7 bold", underline=1)
+buildListButton = Button(bottom_frame, text=" Build the list ", command=get_count_info, bg="seashell3",
+                         highlightbackground="seashell3", fg="black", font="Helvetica 12", underline=1)
 
-setFilepathButton = Button(bottom_frame, text="Set output file name", command=lambda: save_filename(outputFileName),
-                            bg="seashell3", highlightbackground="black", fg="black",
-                           font="Helvetica 7 bold", underline=0)
+setFilepathButton = Button(bottom_frame, text=" Set output file name ", command=lambda: save_filename(outputFileName),
+                           bg="seashell3", highlightbackground="seashell3", fg="black", font="Helvetica 12", underline=0)
 
-exitButton = Button(bottom_frame, text=" Exit Program ", command=root.destroy, bg="seashell3", highlightbackground="black", fg="black",
-                    font="Helvetica 7 bold", underline=1)
+exitButton = Button(bottom_frame, text=" Exit Program ", command=root.destroy, bg="seashell3",
+                    highlightbackground="seashell3", fg="black", font="Helvetica 12", underline=1)
 
 top_frame.pack(padx=5, pady=5, fill="both", expand="yes")
 adamIdEntryLabel.pack(padx=5, pady=5)
