@@ -416,3 +416,38 @@
 #
 #     def get_publisher_name(self):
 #         return self.publisher_name
+# class P:
+#
+#     def __init__(self,x):
+#         self.x = x
+#
+# class Company:
+#     def __init__(self, order_number, employee_assigned, order_totals):
+#         self.order_number = order_number
+#         self.employee_assigned = employee_assigned
+#         self.order_totals = order_totals
+#
+# class Customers:
+#     def __init__(self, name, address, phone_number, customer_number):
+#         self.name = name
+#         self.address = address
+#         self.phone_number = phone_number
+#         self.customer_number = customer_number
+#
+# class Burrito:
+#     def __init__(self, burrito_type, total_cost):
+#         self.burrito_type = burrito_type
+#         self.total_cost = total_cost
+
+class Customers:
+    def __init__(self, name, address, phone_number, bank_account):
+        self.name = name
+        self.address = address
+        self.phone_number = phone_number
+        self.bank_account = bank_account
+
+class Account:
+    def __init__(self, account_number, interest_rate, transaction_total):
+        self.account_number = account_number
+        self.interest_rate = interest_rate
+        self.transaction_total = transaction_total

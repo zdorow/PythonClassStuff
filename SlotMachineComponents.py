@@ -16,9 +16,17 @@ class Wheel:
     def __init__(self):
         self.pick = self.spin()
 
-    def spin(self):
+    @staticmethod
+    def spin():
         random_pick = random.randint(1, 3)
         return random_pick
+
+    def set_pick(self):
+        self.pick = self.spin()
+        return self.pick
+
+    def get_pick(self):
+        return self.pick
 
 
 class Customer:
@@ -30,8 +38,6 @@ class Customer:
     def set_balance(self, balance):
         if balance < 0:
             self.balance = 0
-        elif balance > 1000:
-            self.balance = 1000
         else:
             self.balance = balance
         return self.balance
@@ -51,3 +57,4 @@ class Customer:
 
     def get_bet(self):
         return self.bet
+

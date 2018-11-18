@@ -1,12 +1,12 @@
 import mysql.connector
 mydb = mysql.connector.connect(
-	host="picard.support.jamf.net",
-	user="jamfsoftware",
-	passwd="jamf1234",
-	database="jamfsoftware"
+	host="",
+	user="",
+	passwd="",
+	database=""
 )
 mycursor = mydb.cursor()
-mycursor.execute("select concat('alter table ', table_name, ' engine = innodb;') from information_schema.tables where table_schema = 'jamfsoftware' and engine = 'myisam' and table_name != 'downloadable_file_chunk_data'")
+mycursor.execute("select concat('alter table ', table_name, ' engine = innodb;') from information_schema.tables where table_schema = 'jamfsoftware' and engine = 'myisam'")
 myresult = mycursor.fetchall()
 for x in myresult:
 	print(*x)
