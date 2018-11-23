@@ -15,9 +15,56 @@ import time
 import random
 import threading
 from tkinter import *
-from SlotMachineComponents import *
 from tkinter import simpledialog
 from tkinter import messagebox
+
+
+class Wheel:
+
+    def __init__(self):
+        self.pick = self.spin()
+
+    @staticmethod
+    def spin():
+        random_pick = random.randint(1, 3)
+        return random_pick
+
+    def set_pick(self):
+        self.pick = self.spin()
+        return self.pick
+
+    def get_pick(self):
+        return self.pick
+
+
+class Customer:
+
+    def __init__(self, balance, bet):
+        self.balance = self.set_balance(balance)
+        self.bet = self.set_bet(bet)
+
+    def set_balance(self, balance):
+        if balance < 0:
+            self.balance = 0
+        else:
+            self.balance = balance
+        return self.balance
+
+    def get_balance(self):
+        return self.balance
+
+    def set_bet(self, bet):
+        if bet in range(1, 4):
+            self.bet = bet
+        elif bet < 1:
+            self.bet = 1
+        else:
+            self.bet = 4
+
+        return self.bet
+
+    def get_bet(self):
+        return self.bet
 
 
 class SlotMachineGUI:
@@ -34,6 +81,7 @@ class SlotMachineGUI:
             # lemon = self.resource_path("asset/lemon.png")
             # cherry_img = PhotoImage(file=lemon)
 
+            # These are needing the paths
             lemon_img = PhotoImage(file=r"C:\Users\ZD\IdeaProjects\PythonClassStuff\lemon.png")
             grape_img = PhotoImage(file=r"C:\Users\ZD\IdeaProjects\PythonClassStuff\grape.png")
             cherry_img = PhotoImage(file=r"C:\Users\ZD\IdeaProjects\PythonClassStuff\cherry.png")

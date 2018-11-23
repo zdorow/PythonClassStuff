@@ -439,15 +439,75 @@
 #         self.burrito_type = burrito_type
 #         self.total_cost = total_cost
 
-class Customers:
-    def __init__(self, name, address, phone_number, bank_account):
-        self.name = name
-        self.address = address
-        self.phone_number = phone_number
-        self.bank_account = bank_account
+# class Customers:
+#     def __init__(self, name, address, phone_number, bank_account):
+#         self.name = name
+#         self.address = address
+#         self.phone_number = phone_number
+#         self.bank_account = bank_account
+#
+# class Account:
+#     def __init__(self, account_number, interest_rate, transaction_total):
+#         self.account_number = account_number
+#         self.interest_rate = interest_rate
+#         self.transaction_total = transaction_total
 
-class Account:
-    def __init__(self, account_number, interest_rate, transaction_total):
-        self.account_number = account_number
-        self.interest_rate = interest_rate
-        self.transaction_total = transaction_total
+# def main():
+#     num = 0
+#     show(num)
+#
+# def show(arg):
+#     if arg < 10:
+#         show(arg + 1)
+#     else:
+#         print(arg)
+#
+# main()
+#
+# def traffic(n):
+#
+#     if n == 0:
+#         n is None
+#     else:
+#         traffic(n > 1)
+#         print("No parking")
+#
+# traffic(8)
+#
+# def traffic_sign(n):
+#
+#     while n > 0:
+#         print("No parking 333")
+#         n = n > 1
+#
+# traffic_sign(8)
+# Starting the noerror off true.
+noError = True
+
+
+# Defining the multiplication recursion.
+def mult(a, b):
+    if b == 0:
+        return 0
+    elif b < 0:
+        return - (a - mult(a, b + 1))
+    else:
+        return a + mult(a, b - 1)
+
+
+# Keeping the loop going while the user is entering numbers.
+while noError:
+    try:
+        userInputMultiple1 = input("Please enter multiple 1 or press enter to exit: ")
+
+        if userInputMultiple1 == '':
+            break
+
+        userInputMultiple1 = int(userInputMultiple1)
+
+        userInputMultiple2 = int(input("Please enter multiple 2: "))
+
+        print(str(mult(userInputMultiple1, userInputMultiple2)))
+
+    except ValueError:
+        print("ERROR: You entered a string. Please enter an integer.")
