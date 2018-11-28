@@ -400,7 +400,6 @@ class SlotMachineGUI:
 
         return os.path.join(base_path, relative_path)
 
-
 # Initializing the GUI class and keeping it open.
 root = Tk()
 slot_machine_gui = SlotMachineGUI(root)
