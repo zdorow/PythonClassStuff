@@ -74,12 +74,12 @@ class SlotMachineGUI:
         try:
             # File locations of the pictures used for the slot machine.
             # These ones are used to create the .exe
-            # lemon = self.resource_path("asset/lemon.png")
+            # lemon = self.resource_path("assets/lemon.png")
             # lemon_img = PhotoImage(file=lemon)
-            # grape = self.resource_path("asset/grape.png")
+            # grape = self.resource_path("assets/grape.png")
             # grape_img = PhotoImage(file=grape)
-            # lemon = self.resource_path("asset/lemon.png")
-            # cherry_img = PhotoImage(file=lemon)
+            # cherry = self.resource_path("assets/cherry.png")
+            # cherry_img = PhotoImage(file=cherry)
 
             # These are needing the paths
             lemon_img = PhotoImage(file=r"C:\Users\ZD\IdeaProjects\PythonClassStuff\lemon.png")
@@ -140,24 +140,33 @@ class SlotMachineGUI:
             # Threading needed for the "spin" affect on the spin button.
             thread = threading.Thread(target=lambda: self.spin_the_wheels(pieces, self.first_wheel.pick,
                                                                           self.second_wheel.pick, self.third_wheel.pick,
-                                                                          self.customer.get_bet()), args=())
+                                                                          self.customer.get_bet(),
+                                                                          self.customer.get_balance()), args=())
             self.thread = thread
             self.buttonToSpinWheels = Button(top_bottom_frame, text="   Spin    ", bg="white", fg="black",
                                              font="Helvetica 11 bold", underline=3,
                                              command=lambda: self.thread_start_if_not(self.customer.get_balance(),
                                                                                       self.thread))
+
             self.winningsLabel = Label(top_bottom_frame, text="Last Winnings: 0 ", fg="black", font="Helvetica 12 bold")
             self.buttonToAddFunds = Button(top_bottom_frame, text=" Add Coins ", bg="white", fg="black",
                                            font="Helvetica 11 bold", underline=1,
                                            command=lambda: self.add_coins(Customer.get_balance(self.customer)))
+
             self.buttonToIncreaseBet = Button(middle_bottom_frame, text=" Increase Bet ", bg="white", fg="black",
                                               font="Helvetica 10 bold", underline=1,
-                                              command=lambda: self.increase_bet(Customer.get_bet(self.customer)))
+                                              command=lambda: self.increase_bet(Customer.get_bet(self.customer),
+                                                                                Customer.get_balance(self.customer)))
+
             self.buttonToDecreaseBet = Button(middle_bottom_frame, text=" Decrease Bet ", bg="white", fg="black",
                                               font="Helvetica 10 bold", underline=1,
                                               command=lambda: self.decrease_bet(Customer.get_bet(self.customer)))
+
             self.buttonMaxBet = Button(middle_bottom_frame, text="\n Max Bet \n", bg="white", fg="black", underline=2,
-                                       font="Helvetica 10 bold", command=lambda: self.max_bet())
+                                       font="Helvetica 10 bold",
+                                       command=lambda: self.max_bet(Customer.get_bet(self.customer),
+                                                                    Customer.get_balance(self.customer)))
+
             self.buttonCashOut = Button(bottom_bottom_frame, text=" Cash Out ", bg="white", fg="black",
                                         font="Helvetica 10 bold", underline=1,
                                         command=lambda: self.cash_out(Customer.get_balance(self.customer)))
@@ -197,14 +206,18 @@ class SlotMachineGUI:
             # Key bindings.
             master.bind('<Alt_L><A>', lambda e: self.add_coins(Customer.get_balance(self.customer)))
             master.bind('<Alt_L><a>', lambda e: self.add_coins(Customer.get_balance(self.customer)))
-            master.bind('<Alt_L><S>',
-                        lambda f: self.thread_start_if_not(Customer.get_balance(self.customer), self.thread))
-            master.bind('<Alt_L><s>',
-                        lambda f: self.thread_start_if_not(Customer.get_balance(self.customer), self.thread))
-            master.bind('<Alt_L><I>', lambda g: self.increase_bet(Customer.get_bet(self.customer)))
-            master.bind('<Alt_L><i>', lambda g: self.increase_bet(Customer.get_bet(self.customer)))
-            master.bind('<Alt_L><M>', lambda h: self.max_bet())
-            master.bind('<Alt_L><m>', lambda h: self.max_bet())
+            master.bind('<Alt_L><S>', lambda f: self.thread_start_if_not(Customer.get_balance(self.customer),
+                                                                         self.thread))
+            master.bind('<Alt_L><s>', lambda f: self.thread_start_if_not(Customer.get_balance(self.customer),
+                                                                         self.thread))
+            master.bind('<Alt_L><I>', lambda g: self.increase_bet(Customer.get_bet(self.customer),
+                                                                  Customer.get_balance(self.customer)))
+            master.bind('<Alt_L><i>', lambda g: self.increase_bet(Customer.get_bet(self.customer),
+                                                                  Customer.get_balance(self.customer)))
+            master.bind('<Alt_L><M>', lambda h: self.max_bet(Customer.get_bet(self.customer),
+                                                             Customer.get_balance(self.customer)))
+            master.bind('<Alt_L><m>', lambda h: self.max_bet(Customer.get_bet(self.customer),
+                                                             Customer.get_balance(self.customer)))
             master.bind('<Alt_L><D>', lambda i: self.decrease_bet(Customer.get_bet(self.customer)))
             master.bind('<Alt_L><d>', lambda i: self.decrease_bet(Customer.get_bet(self.customer)))
             master.bind('<Alt_L><C>', lambda j: self.cash_out(Customer.get_balance(self.customer)))
@@ -212,7 +225,7 @@ class SlotMachineGUI:
             master.bind('<Alt_L><X>', lambda k: self.master.destroy())
             master.bind('<Alt_L><x>', lambda k: self.master.destroy())
 
-        except:
+        except Exception:
             messagebox.showerror("Pictures Amount", "The program was unable to find the pieces\n"
                                                     + lemon + cherry + grape)
 
@@ -230,11 +243,21 @@ class SlotMachineGUI:
         else:
             self.customer.set_balance(new_customer_balance)
             self.balanceTotalOutput.configure(text=f"Balance: {new_customer_balance:3}")
+            self.buttonToSpinWheels.configure(state=NORMAL)
 
     # Cash out function to make file simulating a receipt.
     def cash_out(self, customer_balance):
+
+        # receipt = self.resource_path("assets/receipt_file.txt")
+
+        # receipt_file = open(receipt, "w+")
+
         messagebox.showinfo("Success", f"Printing Receipt... \n"
                                        f"Please see the cashier for your payout of: {customer_balance}")
+
+        self.customer.set_balance(0)
+        self.balanceTotalOutput.configure(text="Balance:   0")
+        self.buttonToSpinWheels.configure(state=DISABLED)
 
         receipt_file = open("receipt_file.txt", "w+")
 
@@ -247,80 +270,101 @@ class SlotMachineGUI:
                            "#                                                                #\n"
                            "#                                                                #\n"
                            "##################################################################\n")
-        os.startfile("receipt_file.txt")
 
-        self.customer.set_balance(0)
-        self.balanceTotalOutput.configure(text="Balance:   0")
+        os.startfile(receipt_file.name)
+        # os.startfile(receipt_file)
 
     # Increasing the bet by 1.
-    def increase_bet(self, bet):
-        new_current_bet = bet + 1
-        self.customer.set_bet(new_current_bet)
-        self.betTotalOutput.configure(text=f"Bet: {self.customer.get_bet():1}")
+    def increase_bet(self, bet, balance):
+
+        if balance >= bet:
+            new_current_bet = bet + 1
+            self.customer.set_bet(new_current_bet)
+            self.betTotalOutput.configure(text=f"Bet: {self.customer.get_bet():1}")
+        else:
+            messagebox.showerror("Not Enough Funds", "Please Add more coins to bet.\n"
+                                                     "This game has to have enough coins for the bet.\n")
 
     # Decreasing the bet by 1.
     def decrease_bet(self, bet):
-        new_current_bet = bet - 1
-        self.customer.set_bet(new_current_bet)
-        self.betTotalOutput.configure(text=f"Bet: {self.customer.get_bet():1}")
+            new_current_bet = bet - 1
+            self.customer.set_bet(new_current_bet)
+            self.betTotalOutput.configure(text=f"Bet: {self.customer.get_bet():1}")
 
     # Increasing the bet by the max 4.
-    def max_bet(self):
-        self.customer.set_bet(4)
-        self.betTotalOutput.configure(text=f"Bet: {self.customer.get_bet():1}")
+    def max_bet(self, bet, balance):
+        if balance >= bet:
+            self.customer.set_bet(4)
+            self.betTotalOutput.configure(text=f"Bet: {self.customer.get_bet():1}")
+        else:
+            messagebox.showerror("Not Enough Funds", "Please Add more coins to bet.\n"
+                                                     "This game has to have enough coins for the bet.\n")
 
     # Here is where the wheel spinning occurs and the final picks are made.
-    def spin_the_wheels(self, pieces, wheel_one, wheel_two, wheel_three, bet):
+    def spin_the_wheels(self, pieces, wheel_one, wheel_two, wheel_three, bet, balance):
+        if balance >= bet:
+            # For loop to simulate spinning.
+            for run in range(1, 15):
+                # Disabling the spin button until the spinning is done.
+                self.buttonToSpinWheels.configure(state=DISABLED)
 
-        # For loop to simulate spinning.
-        for run in range(1, 15):
-            # Disabling the spin button until the spinning is done.
-            self.buttonToSpinWheels.configure(state=DISABLED)
+                # Converting them randomly to a list pick and then setting the image to it every 10 milliseconds.
+                time.sleep(0.1)
+                number, random_pick1 = random.choice(list(pieces.items()))
+                number, random_pick2 = random.choice(list(pieces.items()))
+                number, random_pick3 = random.choice(list(pieces.items()))
+                self.firstWheel.configure(image=random_pick1)
+                self.secondWheel.configure(image=random_pick2)
+                self.thirdWheel.configure(image=random_pick3)
 
-            # Converting them randomly to a list pick and then setting the image to it every 10 milliseconds.
-            time.sleep(0.1)
-            number, random_pick1 = random.choice(list(pieces.items()))
-            number, random_pick2 = random.choice(list(pieces.items()))
-            number, random_pick3 = random.choice(list(pieces.items()))
-            self.firstWheel.configure(image=random_pick1)
-            self.secondWheel.configure(image=random_pick2)
-            self.thirdWheel.configure(image=random_pick3)
+            # Setting the output for the final pick.
+            self.firstWheel.configure(image=pieces[wheel_one])
+            self.secondWheel.configure(image=pieces[wheel_two])
+            self.thirdWheel.configure(image=pieces[wheel_three])
 
-        # Setting the output for the final pick.
-        self.firstWheel.configure(image=pieces[wheel_one])
-        self.secondWheel.configure(image=pieces[wheel_two])
-        self.thirdWheel.configure(image=pieces[wheel_three])
+            # Calculating the winnings for the round.
+            winnings = self.winnings(wheel_one, wheel_two, wheel_three, bet)
+            self.winningsLabel.configure(text=f"Last Winnings: {winnings:2}")
+            current_balance = winnings + self.customer.get_balance() - bet
 
-        # Calculating the winnings for the round.
-        winnings = self.winnings(wheel_one, wheel_two, wheel_three, bet)
-        self.winningsLabel.configure(text=f"Last Winnings: {winnings:2}")
-        current_balance = winnings + self.customer.get_balance() - bet
+            # Setting the customers new balance.
+            self.customer.set_balance(current_balance)
+            self.balanceTotalOutput.configure(text=f"Balance: {current_balance:3}")
 
-        # Setting the custoomers new balance.
-        self.customer.set_balance(current_balance)
-        self.balanceTotalOutput.configure(text=f"Balance: {current_balance:3}")
+        else:
+            messagebox.showerror("Not Enough Funds", "Please Add more coins to bet.\n"
+                                                     "This game has to have enough coins for the bet.\n")
 
-        # Starting a new thread for the next spin and configuring the buttons and key bindings to use the new thread.
+        # Starting a new thread for the next spin and configuring the buttons and key bindings
+        #  to use the new thread.
+
         new_thread = threading.Thread(target=lambda: self.spin_the_wheels(pieces,
                                                                           self.first_wheel.spin(),
                                                                           self.second_wheel.spin(),
                                                                           self.third_wheel.spin(),
-                                                                          self.customer.get_bet()))
+                                                                          self.customer.get_bet(),
+                                                                          self.customer.get_balance()))
         new_thread = new_thread
         self.buttonToSpinWheels.configure(state=NORMAL,
-                                          command=lambda: self.thread_start_if_not(current_balance, new_thread))
-        self.master.bind('<Alt_L><S>', lambda f: self.thread_start_if_not(current_balance, new_thread))
-        self.master.bind('<Alt_L><s>', lambda f: self.thread_start_if_not(current_balance, new_thread))
+                                          command=lambda: self.thread_start_if_not(self.customer.get_balance(), new_thread))
+        self.master.bind('<Alt_L><S>', lambda f: self.thread_start_if_not(self.customer.get_balance(), new_thread))
+        self.master.bind('<Alt_L><s>', lambda f: self.thread_start_if_not(self.customer.get_balance(), new_thread))
 
     # Static method that does a thread start check along with min and max balance checks.
-    @staticmethod
-    def thread_start_if_not(customer_balance, thread):
+    def thread_start_if_not(self, customer_balance, thread):
 
         if customer_balance >= 1000:
             messagebox.showerror("Max Amount", "Please cash out.\n"
                                                "This game has a limit of 1000 coins.")
-        elif not thread.is_alive() and customer_balance != 0:
+
+        elif not customer_balance >= 0 and thread.is_alive():
+            thread.join(1)
+            messagebox.showerror("Error", "Please insert coins.\n"
+                                          "This game needs coins to play.")
+
+        elif not thread.is_alive() and customer_balance > 0:
             thread.start()
+
         else:
             messagebox.showerror("Error", "Please insert coins.\n"
                                           "This game needs coins to play.")
